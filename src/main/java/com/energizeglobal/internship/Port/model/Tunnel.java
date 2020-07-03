@@ -11,8 +11,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Tunnel {
     private static final Logger log = Logger.getLogger(Tunnel.class);
     private static final int SHIP_CAPACITY = 5;
-    private volatile AtomicInteger shipCount = new AtomicInteger(0);
-    private Semaphore semaphore = new Semaphore(SHIP_CAPACITY, true);
+
+    private final AtomicInteger shipCount = new AtomicInteger(0);
+    private final Semaphore semaphore = new Semaphore(SHIP_CAPACITY, true);
 
     public void enter(Ship ship) {
         log.info(ship + " tries to enter to " + this + ": " + LocalDateTime.now());

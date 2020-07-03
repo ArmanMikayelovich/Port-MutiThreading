@@ -9,13 +9,13 @@ public class PlatformFactory {
 
         switch (type) {
             case FOOD: {
-                return new FoodPlatform(ProductType.FOOD, tunnel);
+                return new Platform(ProductType.FOOD, tunnel);
             }
             case TECH: {
-                return new TechPlatform(ProductType.TECH, tunnel);
+                return new Platform(ProductType.TECH, tunnel);
             }
             case CLOTHES: {
-                return new ClothesPlatform(ProductType.CLOTHES, tunnel);
+                return new Platform(ProductType.CLOTHES, tunnel);
             }
             default: {
                 throw new RuntimeException("Invalid platform type");
