@@ -20,8 +20,8 @@ public class MockClient {
 
     public static void main(String[] args) {
         ShipFactory bigShipFactory = new BigShipFactory();
-        MiddleShipFactory middleShipFactory = new MiddleShipFactory();
-        SmallShipFactory smallShipFactory = new SmallShipFactory();
+        ShipFactory middleShipFactory = new MiddleShipFactory();
+        ShipFactory smallShipFactory = new SmallShipFactory();
 
         List<Ship> allShips = new ArrayList<>();
         allShips.addAll(createShips(bigShipFactory));
@@ -34,41 +34,32 @@ public class MockClient {
 
     public static List<Ship> createShips(ShipFactory shipFactory) {
         ArrayList<Ship> ships = new ArrayList<>();
-        ships.add(shipFactory.createClothesShip());
-        ships.add(shipFactory.createClothesShip());
-        ships.add(shipFactory.createClothesShip());
+        for (int x = 0; x < 3; x++) {
+            ships.add(shipFactory.createClothesShip());
+        }
+        for (int x = 0; x < 6; x++) {
+            ships.add(shipFactory.createFoodShip());
+        }
 
-        ships.add(shipFactory.createFoodShip());
-        ships.add(shipFactory.createFoodShip());
-        ships.add(shipFactory.createFoodShip());
-        ships.add(shipFactory.createFoodShip());
-        ships.add(shipFactory.createFoodShip());
-
-        ships.add(shipFactory.createTechSip());
-        ships.add(shipFactory.createTechSip());
-        ships.add(shipFactory.createTechSip());
-        ships.add(shipFactory.createTechSip());
-        ships.add(shipFactory.createTechSip());
-        ships.add(shipFactory.createTechSip());
-        ships.add(shipFactory.createTechSip());
+        for (int x = 0; x < 8; x++) {
+            ships.add(shipFactory.createTechSip());
+        }
         log.info("Created " + ships.size() + " ships");
         return ships;
     }
 
     public static List<Platform> createPlatforms(PlatformFactory platformFactory, Tunnel tunnel) {
         ArrayList<Platform> platforms = new ArrayList<>();
-        platforms.add(platformFactory.createPlatform(ProductType.CLOTHES, tunnel));
-        platforms.add(platformFactory.createPlatform(ProductType.CLOTHES, tunnel));
-        platforms.add(platformFactory.createPlatform(ProductType.CLOTHES, tunnel));
-        platforms.add(platformFactory.createPlatform(ProductType.CLOTHES, tunnel));
+        for (int x = 0; x < 4; x++) {
+            platforms.add(platformFactory.createPlatform(ProductType.CLOTHES, tunnel));
+        }
+        for (int x = 0; x < 2; x++) {
+            platforms.add(platformFactory.createPlatform(ProductType.FOOD, tunnel));
+        }
 
-        platforms.add(platformFactory.createPlatform(ProductType.FOOD, tunnel));
-        platforms.add(platformFactory.createPlatform(ProductType.FOOD, tunnel));
-
-        platforms.add(platformFactory.createPlatform(ProductType.TECH, tunnel));
-        platforms.add(platformFactory.createPlatform(ProductType.TECH, tunnel));
-        platforms.add(platformFactory.createPlatform(ProductType.TECH, tunnel));
-
+        for (int x = 0; x < 3; x++) {
+            platforms.add(platformFactory.createPlatform(ProductType.TECH, tunnel));
+        }
         log.debug("Created " + platforms.size() + " platforms");
         return platforms;
     }
