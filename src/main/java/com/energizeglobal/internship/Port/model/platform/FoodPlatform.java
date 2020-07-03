@@ -17,10 +17,7 @@ public class FoodPlatform extends AbstractPlatform {
 
 
 
-    @Override
-    public ProductType getServingProductType() {
-        return ProductType.FOOD;
-    }
+
 
     @Override
     public String toString() {

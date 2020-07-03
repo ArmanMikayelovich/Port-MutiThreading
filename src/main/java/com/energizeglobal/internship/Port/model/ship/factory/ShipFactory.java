@@ -1,11 +1,18 @@
 package com.energizeglobal.internship.Port.model.ship.factory;
 
-import com.energizeglobal.internship.Port.model.ship.Ship;
+import com.energizeglobal.internship.Port.model.ship.*;
 
-public interface ShipFactory {
-    Ship createClothesShip();
+public class ShipFactory {
+    public Ship createClothesShip(Capacity capacity) {
+        return new ClothesShip(capacity);
+    }
 
-    Ship createFoodShip();
+    public Ship createFoodShip(Capacity capacity) {
+        return new FoodShip(capacity);
+    }
 
-    Ship createTechSip();
+    public Ship createTechSip(Capacity capacity) {
+        return new TechShip(capacity);
+    }
+
 }

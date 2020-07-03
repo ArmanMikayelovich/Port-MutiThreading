@@ -4,11 +4,9 @@ import com.energizeglobal.internship.Port.model.ProductType;
 import com.energizeglobal.internship.Port.model.Tunnel;
 import com.energizeglobal.internship.Port.model.platform.Platform;
 import com.energizeglobal.internship.Port.model.platform.PlatformFactory;
+import com.energizeglobal.internship.Port.model.ship.Capacity;
 import com.energizeglobal.internship.Port.model.ship.Ship;
-import com.energizeglobal.internship.Port.model.ship.factory.BigShipFactory;
-import com.energizeglobal.internship.Port.model.ship.factory.MiddleShipFactory;
 import com.energizeglobal.internship.Port.model.ship.factory.ShipFactory;
-import com.energizeglobal.internship.Port.model.ship.factory.SmallShipFactory;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -19,15 +17,8 @@ public class MockClient {
     private static final Logger log = Logger.getLogger(MockClient.class);
 
     public static void main(String[] args) {
-        ShipFactory bigShipFactory = new BigShipFactory();
-        ShipFactory middleShipFactory = new MiddleShipFactory();
-        ShipFactory smallShipFactory = new SmallShipFactory();
-
-        List<Ship> allShips = new ArrayList<>();
-        allShips.addAll(createShips(bigShipFactory));
-        allShips.addAll(createShips(middleShipFactory));
-        allShips.addAll(createShips(smallShipFactory));
-
+        ShipFactory shipFactory = new ShipFactory();
+        List<Ship> allShips = new ArrayList<>(createShips(shipFactory));
         test(allShips);
 
     }
@@ -35,14 +26,14 @@ public class MockClient {
     public static List<Ship> createShips(ShipFactory shipFactory) {
         ArrayList<Ship> ships = new ArrayList<>();
         for (int x = 0; x < 3; x++) {
-            ships.add(shipFactory.createClothesShip());
+            ships.add(shipFactory.createClothesShip(Capacity.FIFTY));
         }
         for (int x = 0; x < 6; x++) {
-            ships.add(shipFactory.createFoodShip());
+            ships.add(shipFactory.createFoodShip(Capacity.HUNDRED));
         }
 
         for (int x = 0; x < 8; x++) {
-            ships.add(shipFactory.createTechSip());
+            ships.add(shipFactory.createTechSip(Capacity.TEN));
         }
         log.info("Created " + ships.size() + " ships");
         return ships;
@@ -76,12 +67,15 @@ public class MockClient {
             switch (ship.getProductType()) {
                 case CLOTHES: {
                     ship.goToPlatform(platformList.get(0));
+                    break;
                 }
                 case FOOD: {
                     ship.goToPlatform(platformList.get(1));
+                    break;
                 }
                 case TECH: {
                     ship.goToPlatform(platformList.get(2));
+                    break;
                 }
             }
         }
